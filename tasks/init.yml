@@ -1,0 +1,5 @@
+---
+
+- fail:
+    msg: You must fill the proxy type
+  when: zabbix_proxy__type is not defined

@@ -1,0 +1,15 @@
+---
+# defaults file for zabbix-proxy
+
+# Simple placeholder to allow other roles to detect this role
+zabbix_proxy__role: True
+
+# Enable facts deploiement
+zabbix_proxy__facts: False
+
+# Select type of database backend to use
+# in 'mysql', 'pgsql'
+#zabbix_proxy__type:
+
+# Which version to install (if it is possible)
+zabbix_proxy__version: 3.4

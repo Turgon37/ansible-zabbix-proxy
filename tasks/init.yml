@@ -11,3 +11,4 @@
       - 1024 <= zabbix_proxy__server_port and zabbix_proxy__server_port <= 32767
       - 1024 <= zabbix_proxy__listen_port and zabbix_proxy__listen_port <= 32767
       - zabbix_proxy__db_name is defined
+      - 0 <= zabbix_proxy__log_size and zabbix_proxy__log_size <= 1024

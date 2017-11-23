@@ -24,6 +24,8 @@ zabbix_proxy__service_name: zabbix-proxy
 
 # Location of var directory for zabbix
 zabbix_proxy__var_directory: /var/lib/zabbix
+# Location of logs for zabbix
+zabbix_proxy__log_directory: /var/log/zabbix
 
 # Configuration directory (shared with agent)
 zabbix_proxy__conf_directory: /etc/zabbix
@@ -45,6 +47,21 @@ zabbix_proxy__socket_dir: /var/run/zabbix
 #	0 - proxy in the active mode
 #	1 - proxy in the passive mode
 zabbix_proxy__mode: 1
+
+# LogType
+#	Specifies where log messages are written to:
+#		system  - syslog
+#		file    - file specified with LogFile parameter
+#		console - standard output
+zabbix_proxy__log_type: file
+
+# LogFile : Log file name for LogType 'file' parameter.
+zabbix_proxy__log_file: '{{ zabbix_proxy__log_directory }}/zabbix_proxy.log'
+
+# LogFileSize
+#	Maximum size of log file in MB.
+#	0 - disable automatic log rotation.
+zabbix_proxy__log_size: 1
 
 
 ############ NETWORK PARAMETERS #################

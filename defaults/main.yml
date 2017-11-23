@@ -13,3 +13,51 @@ zabbix_proxy__facts: False
 
 # Which version to install (if it is possible)
 zabbix_proxy__version: 3.4
+
+# User to run zabbix as
+zabbix_proxy__service_user: zabbix
+# Group to run zabbix as
+zabbix_proxy__service_group: '{{ zabbix_proxy__service_user }}'
+
+# Name of zabbix service
+zabbix_proxy__service_name: zabbix-proxy
+
+# Location of var directory for zabbix
+zabbix_proxy__var_directory: /var/lib/zabbix
+
+# Configuration directory (shared with agent)
+zabbix_proxy__conf_directory: /etc/zabbix
+# Main configuration file
+zabbix_proxy__conf_file: '{{ zabbix_proxy__conf_directory }}/zabbix_proxy.conf'
+
+
+############ GENERAL PARAMETERS #################
+# Proxy operating mode.
+#	0 - proxy in the active mode
+#	1 - proxy in the passive mode
+zabbix_proxy__mode: 1
+
+
+############ NETWORK PARAMETERS #################
+# IP address (or hostname) of Zabbix server.
+#	Active proxy will get configuration data from the server.
+#	For a proxy in the passive mode this parameter will be ignored.
+#zabbix_proxy__server:
+
+# ServerPort
+#	Port of Zabbix trapper on Zabbix server.
+#	For a proxy in the passive mode this parameter will be ignored.
+zabbix_proxy__server_port: 10051
+
+# Hostname
+#	Unique, case sensitive Proxy name. Make sure the Proxy name is known to the server!
+#	Value is acquired from HostnameItem if undefined.
+zabbix_proxy__hostname: '{{ ansible_hostname }}'
+
+# ListenPort
+#	Listen port for trapper.
+zabbix_proxy__listen_port: 10051
+
+# SourceIP
+#	Source IP address for outgoing connections.
+#zabbix_proxy__source_ip:

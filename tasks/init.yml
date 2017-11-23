@@ -1,5 +1,12 @@
 ---
-
 - fail:
     msg: You must fill the proxy type
   when: zabbix_proxy__type is not defined
+
+- name: Assert required variables
+  assert:
+    that:
+      - zabbix_proxy__mode in [0, 1]
+      - zabbix_proxy__mode == 1 or zabbix_proxy__server is defined
+      - 1024 <= zabbix_proxy__server_port and zabbix_proxy__server_port <= 32767
+      - 1024 <= zabbix_proxy__listen_port and zabbix_proxy__listen_port <= 32767

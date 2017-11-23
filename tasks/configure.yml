@@ -1,1 +1,44 @@
 ---
+
+- name: "Ensure service group '{{ zabbix_proxy__service_group }}' is present"
+  group:
+    name:   '{{ zabbix_proxy__service_group }}'
+    system: yes
+    state:  present
+  notify: [ 'restart-zabbix-proxy' ]
+
+- name: "Ensure service user '{{ zabbix_proxy__service_user }}' is present"
+  user:
+    name:       '{{ zabbix_proxy__service_user }}'
+    group:      '{{ zabbix_proxy__service_group }}'
+    shell:      /sbin/nologin
+    home:       '{{ zabbix_proxy__var_directory }}'
+    createhome: no
+    system:     yes
+    state:      present
+  notify: [ 'restart-zabbix-proxy' ]
+
+- name: Make sure the var directory exists
+  file:
+    path:  '{{ zabbix_proxy__var_directory }}'
+    owner: '{{ zabbix_proxy__service_user }}'
+    group: '{{ zabbix_proxy__service_group }}'
+    state: directory
+    mode:  0700
+  notify: [ 'restart-zabbix-proxy' ]
+
+- name: Make sure the configuration directory exists
+  file:
+    path:  '{{ zabbix_proxy__conf_directory }}'
+    state: directory
+    mode:  0755
+  notify: [ 'restart-zabbix-proxy' ]
+
+- name: Update main configuration file
+  template:
+    src:   'zabbix_proxy.conf.j2'
+    dest:  '{{ zabbix_proxy__conf_file }}'
+    owner: root
+    group: '{{ zabbix_proxy__service_group }}'
+    mode:  0640
+  notify: [ 'restart-zabbix-proxy' ]

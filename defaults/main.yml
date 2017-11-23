@@ -32,6 +32,15 @@ zabbix_proxy__conf_file: '{{ zabbix_proxy__conf_directory }}/zabbix_proxy.conf'
 
 
 ############ GENERAL PARAMETERS #################
+### Option: PidFile
+#	Name of PID file.
+# PidFile=/tmp/zabbix_proxy.pid
+zabbix_proxy__pid_file: /var/run/zabbix/zabbix_proxy.pid
+
+# SocketDir
+#	IPC socket directory. Directory to store IPC sockets used by internal Zabbix services.
+zabbix_proxy__socket_dir: /var/run/zabbix
+
 # Proxy operating mode.
 #	0 - proxy in the active mode
 #	1 - proxy in the passive mode
@@ -54,6 +63,10 @@ zabbix_proxy__server_port: 10051
 #	Value is acquired from HostnameItem if undefined.
 zabbix_proxy__hostname: '{{ ansible_hostname }}'
 
+# HostnameItem
+#	Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
+zabbix_proxy__hostname_item: system.hostname
+
 # ListenPort
 #	Listen port for trapper.
 zabbix_proxy__listen_port: 10051
@@ -61,3 +74,31 @@ zabbix_proxy__listen_port: 10051
 # SourceIP
 #	Source IP address for outgoing connections.
 #zabbix_proxy__source_ip:
+
+
+############ DATABASE PARAMETERS #################
+
+# DBHost : Database host name.
+#	If set to localhost, socket is used for MySQL.
+#	If set to empty string, socket is used for PostgreSQL.
+zabbix_proxy__db_host: localhost
+
+# DBSocket : Path to MySQL socket.
+#zabbix_proxy__db_socket:
+
+# DBPort : Database port when not using local socket. Ignored for SQLite.
+#zabbix_proxy__db_port: 3306
+
+# DBName : Database name.
+#	For SQLite3 path to database file must be provided. DBUser and DBPassword are ignored.
+#	Warning: do not attempt to use the same database Zabbix server is using.
+#zabbix_proxy__db_name:
+
+# DBSchema : Schema name. Used for IBM DB2 and PostgreSQL.
+zabbix_proxy__db_schema: public
+
+# DBUser : Database user. Ignored for SQLite.
+#zabbix_proxy__db_user:
+
+# DBPassword : Database password. Ignored for SQLite.
+#zabbix_proxy__db_password:

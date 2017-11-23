@@ -1,0 +1,7 @@
+---
+# handlers file for zabbix-proxy
+
+- name: restart-zabbix-proxy
+  service:
+    name:  '{{ zabbix_proxy__service_name }}'
+    state: restarted

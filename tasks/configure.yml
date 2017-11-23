@@ -27,6 +27,15 @@
     mode:  0700
   notify: [ 'restart-zabbix-proxy' ]
 
+- name: Make sure the log directory exists
+  file:
+    path:  '{{ zabbix_proxy__log_directory }}'
+    owner: '{{ zabbix_proxy__service_user }}'
+    group: '{{ zabbix_proxy__service_group }}'
+    state: directory
+    mode:  0755
+  notify: [ 'restart-zabbix-proxy' ]
+
 - name: Make sure the configuration directory exists
   file:
     path:  '{{ zabbix_proxy__conf_directory }}'

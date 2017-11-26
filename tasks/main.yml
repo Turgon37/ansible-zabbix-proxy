@@ -18,5 +18,8 @@
 - import_tasks: configure.yml
   tags: ['zabbix-proxy', 'zabbix-proxy-configure']
 
+- import_tasks: service.yml
+  tags: ['zabbix-proxy', 'zabbix-proxy-service']
+
 - include_tasks: facts.yml
   when: zabbix_proxy__facts|bool

@@ -1,0 +1,7 @@
+---
+
+- name: Ensure zabbix-proxy is started and enabled on boot
+  service:
+    name:    '{{ zabbix_proxy__service_name }}'
+    enabled: yes
+    state:   started

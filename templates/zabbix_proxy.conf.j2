@@ -14,18 +14,16 @@ LogFile={{ zabbix_proxy__log_file }}
 LogFileSize={{ zabbix_proxy__log_size|int }}
 
 
-
 ############ NETWORK PARAMETERS #################
+ListenPort={{ zabbix_proxy__listen_port|int }}
+{% if zabbix_proxy__source_ip is defined %}
+SourceIP={{ zabbix_proxy__source_ip }}
+{% endif %}
+
 {% if zabbix_proxy__server is defined %}
 Server={{ zabbix_proxy__server }}
 {% endif %}
 ServerPort={{ zabbix_proxy__server_port|int }}
-
-ListenPort={{ zabbix_proxy__listen_port|int }}
-
-{% if zabbix_proxy__source_ip is defined %}
-SourceIP={{ zabbix_proxy__source_ip }}
-{% endif %}
 
 Hostname={{ zabbix_proxy__hostname }}
 {% if zabbix_proxy__hostname is not defined %}
@@ -49,4 +47,3 @@ DBUser={{ zabbix_proxy__db_user }}
 {% if zabbix_proxy__db_password is defined %}
 DBPassword={{ zabbix_proxy__db_password }}
 {% endif %}
-

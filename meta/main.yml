@@ -17,5 +17,6 @@ dependencies:
   - role: zabbix-common
     zabbix_common__version: '{{ zabbix_proxy__version }}'
     zabbix_common__packages_name: "zabbix-proxy-{{ zabbix_proxy__type }}"
+    zabbix_common__service_name: '{{ zabbix_proxy__service_name }}'
     zabbix_common__service_handler: restart-zabbix-proxy
     when: zabbix_proxy__type is defined

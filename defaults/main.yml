@@ -66,7 +66,7 @@ zabbix_proxy__server_port: 10051
 # Hostname
 #	Unique, case sensitive Proxy name. Make sure the Proxy name is known to the server!
 #	Value is acquired from HostnameItem if undefined.
-zabbix_proxy__hostname: '{{ ansible_hostname }}'
+zabbix_proxy__hostname: '{{ ansible_fqdn }}'
 
 # HostnameItem
 #	Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.

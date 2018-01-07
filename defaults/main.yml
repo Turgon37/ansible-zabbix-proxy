@@ -107,3 +107,34 @@ zabbix_proxy__db_schema: public
 
 # DBPassword : Database password. Ignored for SQLite.
 #zabbix_proxy__db_password:
+
+
+############ PROXY PARAMETERS #################
+
+# ProxyLocalBuffer
+#	Proxy will keep data locally for N hours, even if the data have already been synced with the server.
+#	This parameter may be used if local data will be used by third party applications.
+zabbix_proxy__local_buffer: 0
+
+# ProxyOfflineBuffer
+#	Proxy will keep data for N hours in case if no connectivity with Zabbix Server.
+#	Older data will be lost.
+zabbix_proxy__offline_buffer: 1
+
+# HeartbeatFrequency
+#	Frequency of heartbeat messages in seconds.
+#	Used for monitoring availability of Proxy on server side.
+#	0 - heartbeat messages disabled.
+#	For a proxy in the passive mode this parameter will be ignored.
+#
+zabbix_proxy__heartbeat_frequency: 60
+
+# ConfigFrequency
+#	How often proxy retrieves configuration data from Zabbix Server in seconds.
+#	For a proxy in the passive mode this parameter will be ignored.
+zabbix_proxy__config_frequency: 3600
+
+# DataSenderFrequency
+#	Proxy will send collected data to the Server every N seconds.
+#	For a proxy in the passive mode this parameter will be ignored.
+zabbix_proxy__data_sender_frequency: 1

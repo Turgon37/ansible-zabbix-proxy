@@ -12,3 +12,8 @@
       - 1024 <= zabbix_proxy__listen_port and zabbix_proxy__listen_port <= 32767
       - zabbix_proxy__db_name is defined
       - 0 <= zabbix_proxy__log_size and zabbix_proxy__log_size <= 1024
+      - 0 <= zabbix_proxy__local_buffer and zabbix_proxy__local_buffer <= 720
+      - 1 <= zabbix_proxy__offline_buffer and zabbix_proxy__offline_buffer <= 720
+      - 0 <= zabbix_proxy__heartbeat_frequency and zabbix_proxy__heartbeat_frequency <= 3600
+      - 1 <= zabbix_proxy__config_frequency and zabbix_proxy__config_frequency <= (3600*24*7)
+      - 1 <= zabbix_proxy__data_sender_frequency and zabbix_proxy__data_sender_frequency <= 3600

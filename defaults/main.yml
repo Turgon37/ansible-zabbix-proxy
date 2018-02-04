@@ -26,7 +26,7 @@ zabbix_proxy__service_group: '{{ zabbix_proxy__service_user }}'
 zabbix_proxy__conf_directory: /etc/zabbix
 
 # Main configuration file
-zabbix_proxy__conf_file: '{{ zabbix_common__conf_directory }}/zabbix_proxy.conf'
+zabbix_proxy__conf_file: '{{ zabbix_proxy__conf_directory }}/zabbix_proxy.conf'
 
 # Location of var directory for zabbix
 zabbix_proxy__var_directory: /var/lib/zabbix
@@ -57,7 +57,7 @@ zabbix_proxy__mode: 1
 zabbix_proxy__log_type: file
 
 # LogFile : Log file name for LogType 'file' parameter.
-zabbix_proxy__log_file: '{{ zabbix_common__log_directory }}/zabbix_proxy.log'
+zabbix_proxy__log_file: '{{ zabbix_proxy__log_directory }}/zabbix_proxy.log'
 
 # LogFileSize
 #	Maximum size of log file in MB.

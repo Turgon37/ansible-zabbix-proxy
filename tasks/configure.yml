@@ -5,6 +5,6 @@
     src:   'zabbix_proxy.conf.j2'
     dest:  '{{ zabbix_proxy__conf_file }}'
     owner: root
-    group: '{{ zabbix_common__service_group }}'
+    group: '{{ zabbix_proxy__service_group }}'
     mode:  0640
   notify: [ 'restart-zabbix-proxy' ]

@@ -17,8 +17,21 @@ zabbix_proxy__version: 3.4
 # Name of zabbix service
 zabbix_proxy__service_name: zabbix-proxy
 
+# User to run zabbix as
+zabbix_proxy__service_user: zabbix
+# Group to run zabbix as
+zabbix_proxy__service_group: '{{ zabbix_proxy__service_user }}'
+
+# Configuration directory
+zabbix_proxy__conf_directory: /etc/zabbix
+
 # Main configuration file
 zabbix_proxy__conf_file: '{{ zabbix_common__conf_directory }}/zabbix_proxy.conf'
+
+# Location of var directory for zabbix
+zabbix_proxy__var_directory: /var/lib/zabbix
+# Location of logs for zabbix
+zabbix_proxy__log_directory: /var/log/zabbix
 
 
 ############ GENERAL PARAMETERS #################

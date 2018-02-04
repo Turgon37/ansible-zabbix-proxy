@@ -15,6 +15,21 @@
 - import_tasks: init.yml
   tags: ['always']
 
+- name: Run zabbix-common
+  import_role:
+    name: zabbix-common
+  vars:
+    zabbix_common__version: '{{ zabbix_proxy__version }}'
+    zabbix_common__packages_name: "zabbix-proxy-{{ zabbix_proxy__type }}"
+    zabbix_common__service_name: '{{ zabbix_proxy__service_name }}'
+    zabbix_common__service_handler: restart-zabbix-proxy
+    zabbix_common__service_user: '{{ zabbix_proxy__service_user }}'
+    zabbix_common__service_group: '{{ zabbix_proxy__service_group }}'
+    zabbix_common__conf_directory: '{{ zabbix_proxy__conf_directory }}'
+    zabbix_common__var_directory: '{{ zabbix_proxy__var_directory }}'
+    zabbix_common__log_directory: '{{ zabbix_proxy__log_directory }}'
+  tags: ['always']
+
 - import_tasks: configure.yml
   tags: ['zabbix-proxy', 'zabbix-proxy-configure']
 

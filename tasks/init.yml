@@ -17,3 +17,14 @@
       - 0 <= zabbix_proxy__heartbeat_frequency and zabbix_proxy__heartbeat_frequency <= 3600
       - 1 <= zabbix_proxy__config_frequency and zabbix_proxy__config_frequency <= (3600*24*7)
       - 1 <= zabbix_proxy__data_sender_frequency and zabbix_proxy__data_sender_frequency <= 3600
+      - 0 <= zabbix_proxy__start_pollers and zabbix_proxy__start_pollers <= 1000
+      - 0 <= zabbix_proxy__start_ipmi_pollers and zabbix_proxy__start_ipmi_pollers <= 1000
+      - 0 <= zabbix_proxy__start_pollers_unreachable and zabbix_proxy__start_pollers_unreachable <= 1000
+      - 0 <= zabbix_proxy__start_trappers and zabbix_proxy__start_trappers <= 1000
+      - 0 <= zabbix_proxy__start_pingers and zabbix_proxy__start_pingers <= 1000
+      - 0 <= zabbix_proxy__start_discoverers and zabbix_proxy__start_discoverers <= 250
+      - 0 <= zabbix_proxy__start_http_pollers and zabbix_proxy__start_http_pollers <= 1000
+      - 0 <= zabbix_proxy__start_java_pollers and zabbix_proxy__start_java_pollers <= 1000
+      - zabbix_proxy__start_java_pollers == 0 or ( zabbix_proxy__java_gateway is defined and zabbix_proxy__java_gateway|length > 0 )
+      - zabbix_proxy__start_java_pollers == 0 or ( zabbix_proxy__java_gateway_port is defined and 1024 <= zabbix_proxy__java_gateway_port and zabbix_proxy__java_gateway_port <= 32767 )
+      - 0 <= zabbix_proxy__start_snmp_trapper and zabbix_proxy__start_snmp_trapper <= 1

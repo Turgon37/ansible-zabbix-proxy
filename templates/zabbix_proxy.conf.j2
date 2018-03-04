@@ -56,3 +56,25 @@ ProxyOfflineBuffer={{ zabbix_proxy__offline_buffer|int }}
 HeartbeatFrequency={{ zabbix_proxy__heartbeat_frequency|int }}
 ConfigFrequency={{ zabbix_proxy__config_frequency|int }}
 DataSenderFrequency={{ zabbix_proxy__data_sender_frequency|int }}
+
+
+############ POLLERS PARAMETERS #################
+StartPollers={{ zabbix_proxy__start_pollers|int }}
+StartIPMIPollers={{ zabbix_proxy__start_ipmi_pollers|int }}
+StartPollersUnreachable={{ zabbix_proxy__start_pollers_unreachable|int }}
+StartTrappers={{ zabbix_proxy__start_trappers|int }}
+StartPingers={{ zabbix_proxy__start_pingers|int }}
+StartDiscoverers={{ zabbix_proxy__start_discoverers|int }}
+StartHTTPPollers={{ zabbix_proxy__start_http_pollers|int }}
+
+StartJavaPollers={{ zabbix_proxy__start_java_pollers|int }}
+{% if zabbix_proxy__start_java_pollers|int > 0 %}
+JavaGateway={{ zabbix_proxy__java_gateway }}
+JavaGatewayPort={{ zabbix_proxy__java_gateway_port|int }}
+{% endif %}
+
+StartSNMPTrapper={{ zabbix_proxy__start_snmp_trapper|int }}
+{% if zabbix_proxy__start_snmp_trapper|int > 0 %}
+SNMPTrapperFile={{ zabbix_proxy__snmp_trapper_file }}
+ListenIP={{ zabbix_proxy__listen_ip }}
+{% endif %}

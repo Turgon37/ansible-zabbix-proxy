@@ -14,6 +14,8 @@ zabbix_proxy__facts: False
 # Which version to install (if it is possible)
 zabbix_proxy__version: 3.4
 
+### SERVICE CONFIGURATION
+# ---------------------------------------
 # Name of zabbix service
 zabbix_proxy__service_name: zabbix-proxy
 
@@ -36,69 +38,74 @@ zabbix_proxy__log_directory: /var/log/zabbix
 
 ############ GENERAL PARAMETERS #################
 ### Option: PidFile
-#	Name of PID file.
+# Name of PID file.
 # PidFile=/tmp/zabbix_proxy.pid
 zabbix_proxy__pid_file: /var/run/zabbix/zabbix_proxy.pid
 
 # SocketDir
-#	IPC socket directory. Directory to store IPC sockets used by internal Zabbix services.
+# IPC socket directory. Directory to store IPC sockets used by internal Zabbix services.
 zabbix_proxy__socket_dir: /var/run/zabbix
 
 # Proxy operating mode.
-#	0 - proxy in the active mode
-#	1 - proxy in the passive mode
+# 0 - proxy in the active mode
+# 1 - proxy in the passive mode
 zabbix_proxy__mode: 1
 
 # LogType
-#	Specifies where log messages are written to:
-#		system  - syslog
-#		file    - file specified with LogFile parameter
-#		console - standard output
+# Specifies where log messages are written to:
+#  system  - syslog
+#  file    - file specified with LogFile parameter
+#  console - standard output
 zabbix_proxy__log_type: file
 
 # LogFile : Log file name for LogType 'file' parameter.
 zabbix_proxy__log_file: '{{ zabbix_proxy__log_directory }}/zabbix_proxy.log'
 
 # LogFileSize
-#	Maximum size of log file in MB.
-#	0 - disable automatic log rotation.
+# Maximum size of log file in MB.
+# 0 - disable automatic log rotation.
 zabbix_proxy__log_size: 1
 
 
 ############ NETWORK PARAMETERS #################
 # IP address (or hostname) of Zabbix server.
-#	Active proxy will get configuration data from the server.
-#	For a proxy in the passive mode this parameter will be ignored.
+# Active proxy will get configuration data from the server.
+# For a proxy in the passive mode this parameter will be ignored.
 #zabbix_proxy__server:
 
 # ServerPort
-#	Port of Zabbix trapper on Zabbix server.
-#	For a proxy in the passive mode this parameter will be ignored.
+# Port of Zabbix trapper on Zabbix server.
+# For a proxy in the passive mode this parameter will be ignored.
 zabbix_proxy__server_port: 10051
 
 # Hostname
-#	Unique, case sensitive Proxy name. Make sure the Proxy name is known to the server!
-#	Value is acquired from HostnameItem if undefined.
+# Unique, case sensitive Proxy name. Make sure the Proxy name is known to the server!
+# Value is acquired from HostnameItem if undefined.
 zabbix_proxy__hostname: '{{ ansible_fqdn }}'
 
 # HostnameItem
-#	Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
+# Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
 zabbix_proxy__hostname_item: system.hostname
 
 # ListenPort
-#	Listen port for trapper.
+# Listen port for trapper.
 zabbix_proxy__listen_port: 10051
 
+# ListenIP
+# List of comma delimited IP addresses that the trapper should listen on.
+# Trapper will listen on all network interfaces if this parameter is missing.
+zabbix_proxy__listen_ip: 0.0.0.0
+
 # SourceIP
-#	Source IP address for outgoing connections.
+# Source IP address for outgoing connections.
 #zabbix_proxy__source_ip:
 
 
 ############ DATABASE PARAMETERS #################
 
 # DBHost : Database host name.
-#	If set to localhost, socket is used for MySQL.
-#	If set to empty string, socket is used for PostgreSQL.
+# If set to localhost, socket is used for MySQL.
+# If set to empty string, socket is used for PostgreSQL.
 zabbix_proxy__db_host: localhost
 
 # DBSocket : Path to MySQL socket.
@@ -108,8 +115,8 @@ zabbix_proxy__db_host: localhost
 #zabbix_proxy__db_port: 3306
 
 # DBName : Database name.
-#	For SQLite3 path to database file must be provided. DBUser and DBPassword are ignored.
-#	Warning: do not attempt to use the same database Zabbix server is using.
+# For SQLite3 path to database file must be provided. DBUser and DBPassword are ignored.
+# Warning: do not attempt to use the same database Zabbix server is using.
 #zabbix_proxy__db_name:
 
 # DBSchema : Schema name. Used for IBM DB2 and PostgreSQL.
@@ -125,94 +132,89 @@ zabbix_proxy__db_schema: public
 ############ PROXY PARAMETERS #################
 
 # ProxyLocalBuffer
-#	Proxy will keep data locally for N hours, even if the data have already been synced with the server.
-#	This parameter may be used if local data will be used by third party applications.
+# Proxy will keep data locally for N hours, even if the data have already been synced with the server.
+# This parameter may be used if local data will be used by third party applications.
 zabbix_proxy__local_buffer: 0
 
 # ProxyOfflineBuffer
-#	Proxy will keep data for N hours in case if no connectivity with Zabbix Server.
-#	Older data will be lost.
+# Proxy will keep data for N hours in case if no connectivity with Zabbix Server.
+# Older data will be lost.
 zabbix_proxy__offline_buffer: 1
 
 # HeartbeatFrequency
-#	Frequency of heartbeat messages in seconds.
-#	Used for monitoring availability of Proxy on server side.
-#	0 - heartbeat messages disabled.
-#	For a proxy in the passive mode this parameter will be ignored.
+# Frequency of heartbeat messages in seconds.
+# Used for monitoring availability of Proxy on server side.
+# 0 - heartbeat messages disabled.
+# For a proxy in the passive mode this parameter will be ignored.
 #
 zabbix_proxy__heartbeat_frequency: 60
 
 # ConfigFrequency
-#	How often proxy retrieves configuration data from Zabbix Server in seconds.
-#	For a proxy in the passive mode this parameter will be ignored.
+# How often proxy retrieves configuration data from Zabbix Server in seconds.
+# For a proxy in the passive mode this parameter will be ignored.
 zabbix_proxy__config_frequency: 3600
 
 # DataSenderFrequency
-#	Proxy will send collected data to the Server every N seconds.
-#	For a proxy in the passive mode this parameter will be ignored.
+# Proxy will send collected data to the Server every N seconds.
+# For a proxy in the passive mode this parameter will be ignored.
 zabbix_proxy__data_sender_frequency: 1
 
 
 ############ POLLERS PARAMETERS #################
 
 # StartPollers
-#	Number of pre-forked instances of pollers.
+# Number of pre-forked instances of pollers.
 zabbix_proxy__start_pollers: 5
 
 # StartIPMIPollers
-#	Number of pre-forked instances of IPMI pollers.
+# Number of pre-forked instances of IPMI pollers.
 #       The IPMI manager process is automatically started when at least one IPMI poller is started.
 zabbix_proxy__start_ipmi_pollers: 0
 
 # StartPollersUnreachable
-#	Number of pre-forked instances of pollers for unreachable hosts (including IPMI and Java).
-#	At least one poller for unreachable hosts must be running if regular, IPMI or Java pollers
-#	are started.
+# Number of pre-forked instances of pollers for unreachable hosts (including IPMI and Java).
+# At least one poller for unreachable hosts must be running if regular, IPMI or Java pollers
+# are started.
 zabbix_proxy__start_pollers_unreachable: 1
 
 # StartTrappers
-#	Number of pre-forked instances of trappers.
-#	Trappers accept incoming connections from Zabbix sender and active agents.
+# Number of pre-forked instances of trappers.
+# Trappers accept incoming connections from Zabbix sender and active agents.
 zabbix_proxy__start_trappers: 5
 
 # StartPingers
-#	Number of pre-forked instances of ICMP pingers.
+# Number of pre-forked instances of ICMP pingers.
 zabbix_proxy__start_pingers: 1
 
 # StartDiscoverers
-#	Number of pre-forked instances of discoverers.
+# Number of pre-forked instances of discoverers.
 zabbix_proxy__start_discoverers: 1
 
 # StartHTTPPollers
-#	Number of pre-forked instances of HTTP pollers.
+# Number of pre-forked instances of HTTP pollers.
 zabbix_proxy__start_http_pollers: 1
 
 ##### JAVA Poller #####
 # StartJavaPollers
-#	Number of pre-forked instances of Java pollers.
+# Number of pre-forked instances of Java pollers.
 zabbix_proxy__start_java_pollers: 0
 
 # JavaGateway
-#	IP address (or hostname) of Zabbix Java gateway.
-#	Only required if Java pollers are started.
+# IP address (or hostname) of Zabbix Java gateway.
+# Only required if Java pollers are started.
 #zabbix_proxy__java_gateway: 
 
 # JavaGatewayPort
-#	Port that Zabbix Java gateway listens on.
+# Port that Zabbix Java gateway listens on.
 zabbix_proxy__java_gateway_port: 10052
 
 ##### SNMP Trapper #####
 # StartSNMPTrapper
-#	If 1, SNMP trapper process is started.
+# If 1, SNMP trapper process is started.
 zabbix_proxy__start_snmp_trapper: 0
 
 # SNMPTrapperFile
-#	Temporary file used for passing data from SNMP trap daemon to the proxy.
-#	Must be the same as in zabbix_trap_receiver.pl or SNMPTT configuration file.
+# Temporary file used for passing data from SNMP trap daemon to the proxy.
+# Must be the same as in zabbix_trap_receiver.pl or SNMPTT configuration file.
 zabbix_proxy__snmp_trapper_file: '/tmp/zabbix_traps.tmp'
 #/var/log/snmptrap/snmptrap.log
-
-# ListenIP
-#	List of comma delimited IP addresses that the trapper should listen on.
-#	Trapper will listen on all network interfaces if this parameter is missing.
-zabbix_proxy__listen_ip: 0.0.0.0

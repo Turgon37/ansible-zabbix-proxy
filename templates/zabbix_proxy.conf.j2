@@ -16,6 +16,7 @@ LogFileSize={{ zabbix_proxy__log_size|int }}
 
 ############ NETWORK PARAMETERS #################
 ListenPort={{ zabbix_proxy__listen_port|int }}
+ListenIP={{ zabbix_proxy__listen_ip }}
 {% if zabbix_proxy__source_ip is defined %}
 SourceIP={{ zabbix_proxy__source_ip }}
 {% endif %}
@@ -76,5 +77,4 @@ JavaGatewayPort={{ zabbix_proxy__java_gateway_port|int }}
 StartSNMPTrapper={{ zabbix_proxy__start_snmp_trapper|int }}
 {% if zabbix_proxy__start_snmp_trapper|int > 0 %}
 SNMPTrapperFile={{ zabbix_proxy__snmp_trapper_file }}
-ListenIP={{ zabbix_proxy__listen_ip }}
 {% endif %}

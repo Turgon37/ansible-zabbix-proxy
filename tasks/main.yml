@@ -12,10 +12,11 @@
       skip: true
   tags: ['always']
 
-- import_tasks: init.yml
+- name: Importing initialization tasks
+  import_tasks: init.yml
   tags: ['always']
 
-- name: Run zabbix-common
+- name: Importing zabbix-common for install tasks
   import_role:
     name: zabbix-common
   vars:
@@ -25,16 +26,24 @@
     zabbix_common__service_handler: restart-zabbix-proxy
     zabbix_common__service_user: '{{ zabbix_proxy__service_user }}'
     zabbix_common__service_group: '{{ zabbix_proxy__service_group }}'
-    zabbix_common__conf_directory: '{{ zabbix_proxy__conf_directory }}'
+    zabbix_common__conf_directory: '{{ zabbix_proxy__configuration_directory }}'
     zabbix_common__var_directory: '{{ zabbix_proxy__var_directory }}'
     zabbix_common__log_directory: '{{ zabbix_proxy__log_directory }}'
   tags: ['always']
 
-- import_tasks: configure.yml
+- name: Importing configurations tasks
+  import_tasks: configure.yml
   tags: ['zabbix-proxy', 'zabbix-proxy-configure']
 
-- import_tasks: service.yml
+- name: Importing service tasks
+  import_tasks: service.yml
   tags: ['zabbix-proxy', 'zabbix-proxy-service']
 
-- include_tasks: facts.yml
+- name: Include proxy registration tasks
+  include_tasks: register.yml
+  when: zabbix_proxy__register_state is defined
+  tags: ['zabbix-proxy', 'zabbix-proxy-register']
+
+- name: Optionally include facts tasks
+  include_tasks: facts.yml
   when: zabbix_proxy__facts|bool

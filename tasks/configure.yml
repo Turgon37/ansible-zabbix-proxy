@@ -3,7 +3,7 @@
 - name: Update main configuration file
   template:
     src:   'zabbix_proxy.conf.j2'
-    dest:  '{{ zabbix_proxy__conf_file }}'
+    dest:  '{{ zabbix_proxy__service_configuration_file }}'
     owner: root
     group: '{{ zabbix_proxy__service_group }}'
     mode:  0640

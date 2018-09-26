@@ -8,11 +8,20 @@ zabbix_proxy__role: True
 zabbix_proxy__facts: False
 
 # Select type of database backend to use
-# in 'mysql', 'pgsql'
+# in 'mysql', 'pgsql', 'sqlite3'
 #zabbix_proxy__type:
 
+# Proxy registration will only be performed if this is defined
+#zabbix_proxy__register_state
+
+zabbix_proxy__register_proxy_name: '{{ ansible_fqdn }}'
+zabbix_proxy__register_from_host: local
+
+### INSTALL CONFIGURATION
+# ---------------------------------------
 # Which version to install (if it is possible)
 zabbix_proxy__version: 3.4
+
 
 ### SERVICE CONFIGURATION
 # ---------------------------------------
@@ -25,10 +34,10 @@ zabbix_proxy__service_user: zabbix
 zabbix_proxy__service_group: '{{ zabbix_proxy__service_user }}'
 
 # Configuration directory
-zabbix_proxy__conf_directory: /etc/zabbix
+zabbix_proxy__configuration_directory: /etc/zabbix
 
 # Main configuration file
-zabbix_proxy__conf_file: '{{ zabbix_proxy__conf_directory }}/zabbix_proxy.conf'
+zabbix_proxy__service_configuration_file: '{{ zabbix_proxy__configuration_directory }}/zabbix_proxy.conf'
 
 # Location of var directory for zabbix
 zabbix_proxy__var_directory: /var/lib/zabbix
@@ -42,14 +51,24 @@ zabbix_proxy__log_directory: /var/log/zabbix
 # PidFile=/tmp/zabbix_proxy.pid
 zabbix_proxy__pid_file: /var/run/zabbix/zabbix_proxy.pid
 
-# SocketDir
-# IPC socket directory. Directory to store IPC sockets used by internal Zabbix services.
-zabbix_proxy__socket_dir: /var/run/zabbix
-
 # Proxy operating mode.
 # 0 - proxy in the active mode
 # 1 - proxy in the passive mode
 zabbix_proxy__mode: 1
+
+##### Directories #####
+# SocketDir
+# IPC socket directory. Directory to store IPC sockets used by internal Zabbix services.
+zabbix_proxy__socket_directory: /var/run/zabbix
+
+# TmpDir Temporary directory
+zabbix_proxy__tmp_directory: /tmp
+
+# FpingLocation Location of fping
+zabbix_proxy__fping_location: /usr/sbin/fping
+
+# Fping6Location Location of fping6
+zabbix_proxy__fping6_location: /usr/sbin/fping6
 
 # LogType
 # Specifies where log messages are written to:
@@ -65,6 +84,17 @@ zabbix_proxy__log_file: '{{ zabbix_proxy__log_directory }}/zabbix_proxy.log'
 # Maximum size of log file in MB.
 # 0 - disable automatic log rotation.
 zabbix_proxy__log_size: 1
+
+# DebugLevel
+#   Specifies debug level:
+#   0 - basic information about starting and stopping of Zabbix processes
+#   1 - critical information
+#   2 - error information
+#   3 - warnings
+#   4 - for debugging (produces lots of information)
+#   5 - extended debugging (produces even more information)
+# Range: 0-5
+zabbix_proxy__debug_level: 3
 
 
 ############ NETWORK PARAMETERS #################

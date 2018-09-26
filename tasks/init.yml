@@ -6,11 +6,12 @@
 - name: Assert required variables
   assert:
     that:
+      - zabbix_proxy__type in ['mysql', 'pgsql', 'sqlite3']
       - zabbix_proxy__mode in [0, 1]
       - zabbix_proxy__mode == 1 or zabbix_proxy__server is defined
       - 1024 <= zabbix_proxy__server_port and zabbix_proxy__server_port <= 32767
       - 1024 <= zabbix_proxy__listen_port and zabbix_proxy__listen_port <= 32767
-      - zabbix_proxy__db_name is defined
+      - zabbix_proxy__db_name is defined or zabbix_proxy__type in ['sqlite3']
       - 0 <= zabbix_proxy__log_size and zabbix_proxy__log_size <= 1024
       - 0 <= zabbix_proxy__local_buffer and zabbix_proxy__local_buffer <= 720
       - 1 <= zabbix_proxy__offline_buffer and zabbix_proxy__offline_buffer <= 720
@@ -28,3 +29,8 @@
       - zabbix_proxy__start_java_pollers == 0 or ( zabbix_proxy__java_gateway is defined and zabbix_proxy__java_gateway|length > 0 )
       - zabbix_proxy__start_java_pollers == 0 or ( zabbix_proxy__java_gateway_port is defined and 1024 <= zabbix_proxy__java_gateway_port and zabbix_proxy__java_gateway_port <= 32767 )
       - 0 <= zabbix_proxy__start_snmp_trapper and zabbix_proxy__start_snmp_trapper <= 1
+
+- name: Ensure default Sqlite database path
+  set_fact:
+    zabbix_proxy__db_name: '{{ zabbix_proxy__var_directory }}/proxy_db.sqlite'
+  when: zabbix_proxy__db_name is not defined

@@ -5,13 +5,19 @@
 
 ############ GENERAL PARAMETERS #################
 PidFile={{ zabbix_proxy__pid_file }}
-SocketDir={{ zabbix_proxy__socket_dir }}
-
 ProxyMode={{ zabbix_proxy__mode|int }}
+
+##### Directories #####
+SocketDir={{ zabbix_proxy__socket_directory }}
+TmpDir={{ zabbix_proxy__tmp_directory }}
+
+FpingLocation={{ zabbix_proxy__fping_location }}
+Fping6Location={{ zabbix_proxy__fping6_location }}
 
 LogType={{ zabbix_proxy__log_type }}
 LogFile={{ zabbix_proxy__log_file }}
 LogFileSize={{ zabbix_proxy__log_size|int }}
+DebugLevel={{ zabbix_proxy__debug_level|int }}
 
 
 ############ NETWORK PARAMETERS #################

@@ -1,0 +1,25 @@
+---
+
+- name: Register proxy host into zabbix server
+  local_action:
+    module: zabbix_proxy
+    server_url: '{{ zabbix_proxy__register_server_url }}'
+    proxy_name: '{{ zabbix_proxy__register_proxy_name }}'
+    state: "{{ zabbix_proxy__register_state }}"
+    login_user: '{{ zabbix_proxy__register_login_user }}'
+    login_password: '{{ zabbix_proxy__register_login_password }}'
+    validate_certs: '{{ zabbix_proxy__register_validate_certs|d(true) }}'
+  when: zabbix_proxy__register_from_host == 'local'
+  tags: ['zabbix-proxy', 'zabbix-proxy-register']
+
+- name: Register zabbix proxy from remote host
+  zabbix_proxy:
+    server_url: '{{ zabbix_proxy__register_server_url }}'
+    proxy_name: '{{ zabbix_proxy__register_proxy_name }}'
+    state: "{{ zabbix_proxy__register_state }}"
+    login_user: '{{ zabbix_proxy__register_login_user }}'
+    login_password: '{{ zabbix_proxy__register_login_password }}'
+    validate_certs: '{{ zabbix_proxy__register_validate_certs|d(true) }}'
+  when: zabbix_proxy__register_from_host != 'local'
+  delegate_to: '{{ zabbix_proxy__register_from_host }}'
+  tags: ['zabbix-proxy', 'zabbix-proxy-register']

@@ -8,3 +8,16 @@
     group: '{{ zabbix_proxy__service_group }}'
     mode:  0640
   notify: [ 'restart-zabbix-proxy' ]
+
+- name: Test is SQLite database exists
+  stat:
+    path: '{{ zabbix_proxy__var_directory }}/proxy_db.sqlite'
+  when: zabbix_proxy__type not in ['sqlite3']
+  register: _zabbix_proxy__sqlite_empty_stat
+
+- name: Ensure empty file exists at SQLite database path
+  file:
+    path: '{{ zabbix_proxy__var_directory }}/proxy_db.sqlite'
+    state: touch
+  when: zabbix_proxy__type not in ['sqlite3']
+    and not _zabbix_proxy__sqlite_empty_stat.stat.exists

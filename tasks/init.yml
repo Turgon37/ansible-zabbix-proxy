@@ -33,4 +33,4 @@
 - name: Ensure default Sqlite database path
   set_fact:
     zabbix_proxy__db_name: '{{ zabbix_proxy__var_directory }}/proxy_db.sqlite'
-  when: zabbix_proxy__db_name is not defined
+  when: zabbix_proxy__type in ['sqlite3'] and zabbix_proxy__db_name is not defined
